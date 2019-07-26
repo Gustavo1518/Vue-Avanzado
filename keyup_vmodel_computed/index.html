@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>curso de vue.js</title>
+  </head>
+    <div id="app">
+      <h1>{{ titulo }}</h1>
+      <!--v-on:keyup.enter nos permite sociar con alguna tecla del
+      teclado en este caso el enter-->>
+      <input type="Text" v-model="NuevoDia" v-on:keyup.enter="agregar">
+      <button @click="agregar">Agregar</button>
+      <ul>
+        <li v-for="dias in arreglo">{{ dias.Dia}} - {{dias.Hora}}
+          <!--convertimos {{dias.Hora a un input}}-->>
+          <input type="number" v-model.number="dias.Hora">
+          <span v-if="dias.Hora === 7">La hora es 7</span>
+          <button @click="dias.Hora++">Sumar</button>
+          <button @click="dias.Hora--">Restar</button>
+        </li>
+      </ul>
+      <h4>Total : {{ Sumarhoras }}</h4>
+      <span v-if="NuevoDia === '10'" style="color: brown"> Eres un Ganador</span>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

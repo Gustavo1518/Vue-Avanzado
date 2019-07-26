@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>curso de vue.js</title>
+  </head>
+    <div id="app">
+      <div>
+        <ul>
+          <li v-for="yolanda in array">{{ yolanda.edad }}
+          <span v-if="yolanda.edad === 18">Son 18</span>
+        </li>
+        </ul>
+        <ul>
+          <li v-for="pelicula of peliculas">{{ pelicula.Nombre }}
+          <span v-if="pelicula.Nombre === 'Yola'"> ella es yolanda</span>
+        </li>
+        </ul>
+        <ul><li v-for="delegacion of delegaciones">{{ delegacion.Nombre }}
+          <span v-if="delegacion.Nombre === 'add'">Es Agregar</span>
+        </li></ul>        {{ msg }} 
+        <input type="text" class="contenido">
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>curso de vue.js propiedades computadas</title>
+  </head>
+    <div id="app">
+      <gustavo></gustavo>
+      <home></home>
+  </div>
+    </div>
+  </body>
+</html>
+<script>
+Vue.component("gustavo", {
+  template:
+   `
+  <div>
+    <hi>{{ gustavo }}</h1>
+  </div>
+    ` ,
+  data(){
+    return {
+      gustavo: "componente gustavo"
+    }
+  }
+});
+Vue.component('home', {
+  template: 
+  `
+<div>
+  <h1>{{ msg }}</h1>
+  <input type="text" v-model="nuevo">
+  <button @click="empujar">Agregar</button>
+     <ul>
+       <li v-for="(number, index) in datos"> {{ index }} {{ number.numero }}
+        <button>Eliminar</button>
+        </li>
+      </ul>
+</div>
+  `,
+  data (){
+    return{
+       msg: 'component home',
+  nuevo: "",
+  datos: [{numero: "hola"}]
+    }
+  },
+  methods: {
+    empujar(){
+      this.datos.push({
+        numero: this.nuevo
+      });
+      this.nuevo = "";
+    }
+  }
+})
+
+new Vue({
+  el: '#app',
+})
+</script>

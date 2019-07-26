@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>curso de vue.js</title>
+  </head>
+    <div id="app">
+      <h1>{{ titulo }}</h1>
+      <input type="Text" v-model="NuevoDia">
+      <button @click="agregar">Agregar</button>
+      <ul>
+        <li v-for="dias in arreglo">{{ dias.Dia}} - {{dias.Hora}}
+        </li>
+      </ul>
+      <span v-if="NuevoDia === '10'" style="color: brown"> Eres un Ganador</span>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
