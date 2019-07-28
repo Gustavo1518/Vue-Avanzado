@@ -1,3 +1,4 @@
+    
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,34 +18,23 @@
     template: 
     `
     <div>
-      <h1>Numero {{ numero }}</h1>
-      <button @click="decrementar">decrementar</button>
+      <h1>Numero {{numero }}</h1>
+      <button @click="$store.commit('decrementar')">decrementar</button>
     </div>
-
     `,
     computed: {
-      ...Vuex.mapState(['numero'])
-    },
-    methods: {
-      ...Vuex.mapMutations(['decrementar'])
+    ...Vue.mapState(['numero'])
     }
   });
-
   Vue.component('hijo', {
     template: 
     `
     <div>
       <h1>componente hijo</h1>
-      <button @click="aumentar">Aumentar</button>
-      <h1>Numero {{ numero }}</h1>
+      <button @click="$store.commit('aumentar')">Aumentar</button>
+      <h1>Numero {{ $store.state.numero }}</h1>
     </div>
-    `,
-    computed: {
-      ...Vuex.mapState(['numero'])
-    },
-    methods: {
-      ...Vuex.mapMutations(['aumentar'])
-    }
+    `
   });
 const store = new Vuex.Store({
  state: {
@@ -59,7 +49,6 @@ state.numero++
    }
  }
 });
-
 new Vue({
     el: '#app',
     store: store
