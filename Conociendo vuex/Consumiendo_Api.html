@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vuex@3.1.1/dist/vuex.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>curso de vue.js</title>
+  </head>
+    <div id="app">
+    <padre></padre>
+    <hijo></hijo>
+    </div>
+  </body>
+</html>
+<script>
+  Vue.component('padre', {
+    template: 
+    `
+    <div>
+      <h1>Numero {{ numero }}</h1>
+      <button @click="decrementar">decrementar</button>
+    </div>
+
+    `,
+    computed: {
+      ...Vuex.mapState(['numero'])
+    },
+    methods: {
+      ...Vuex.mapMutations(['decrementar'])
+    }
+  });
+
+  Vue.component('hijo', {
+    template: 
+    `
+    <div>
+      <h1>componente hijo</h1>
+      <button @click="aumentar">Aumentar</button>
+      <button @click="obtenercursos">Cursos Disponiblesr</button>
+      <h1>Numero {{ numero }}</h1>
+      <ul v-for="item in cursos">
+        <li>{{ item.curso }}
+          </li>
+          </ul>
+    </div>
+    `,
+    computed: {
+      ...Vuex.mapState(['numero', 'cursos'])
+    },
+    methods: {
+      ...Vuex.mapMutations(['aumentar']),
+      // realizamos un mapeo para optener nuestros cursos
+      ...Vuex.mapActions(['obtenercursos'])
+    }
+  });
+const store = new Vuex.Store({
+ state: {
+   numero: 10,
+   cursos: []
+ },
+ mutations: {
+   aumentar(state){
+state.numero++
+   },
+   decrementar() {
+     this.state.numero--
+   },
+   llenarcursos(state, cursosAccion){
+     state.cursos = cursosAccion
+   }
+ },
+ actions: {
+   /*Creamos una accion que consume o llama a una api y cuando obtiene 
+   los datos realiza un commit el cual ejecuta una mutacion y esta llena
+   todo nuestro cursos que vienen de nuestro json*/
+   obtenercursos: async function({ commit }) {
+     const data = await fetch('Api.json');
+     const cursos = await data.Json();
+     commit('llenarcursos', cursos)
+   }
+ }
+});
+
+new Vue({
+    el: '#app',
+    store: store
+})
+</script>
